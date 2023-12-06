@@ -30,8 +30,8 @@ def hello_world():
     print(nb_class_names, nb_predicted_probabilities[0])
 
     max_probability = -1
-    temp_topic = "not able to find in the corpus"
-    main_topic = "not able to find in the corpus"
+    temp_topic = "Chitchat"
+    main_topic = "Chitchat"
     for i in range(0,len(lr_class_names)):
         avg_prob = (lr_predicted_probabilities[0][i] + nb_predicted_probabilities[0][i]) / 2
         if(max_probability < lr_predicted_probabilities[0][i]):
@@ -39,11 +39,7 @@ def hello_world():
             temp_topic = lr_class_names[i]
     if(max_probability > 0.2):
         main_topic = temp_topic
-    s = str({
-    "class": main_topic,
-    "probability": max_probability,
-   })
-    return s
+    return main_topic
 
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ app = Flask(__name__)
 @app.route('/',methods = ['POST'])
 def generate_response():
     text = request.get_json()
-    new_text = [text['input']]
+    new_text = text['input']
     UTTERANCE = new_text
     inputs = tokenizer([UTTERANCE], return_tensors="pt")
     reply_ids = model.generate(**inputs)
