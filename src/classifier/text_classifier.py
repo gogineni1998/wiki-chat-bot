@@ -11,7 +11,7 @@ app = Flask(__name__)
 def hello_world():
     text = request.get_json()
     new_text = [text['input']]
-
+    topics_selected = text['topics_selected']
     # Logistic Regression
     lr_new_text_processed = lr.named_steps['vect'].transform(new_text)
     lr_new_text_tfidf = lr.named_steps['tfidf'].transform(lr_new_text_processed)
@@ -33,6 +33,8 @@ def hello_world():
     temp_topic = "Chitchat"
     main_topic = "Chitchat"
     for i in range(0,len(lr_class_names)):
+        if(len(topics_selected) > 0 and lr_class_names[i] not in topics_selected):
+            continue
         avg_prob = (lr_predicted_probabilities[0][i] + nb_predicted_probabilities[0][i]) / 2
         if(max_probability < lr_predicted_probabilities[0][i]):
             max_probability = lr_predicted_probabilities[0][i]
