@@ -19,7 +19,7 @@ analytics["Travel"] = 8
 analytics["Food"] = 9
 analytics["Chitchat"] = 10
 
-analytics_count = [0,0,0,0,0,0,0,0,0,0]
+analytics_count = [0,0,0,0,0,0,0,0,0,0,0]
 
 @app.route('/',methods = ['POST'])
 @cross_origin(supports_credentials=True)
@@ -46,6 +46,11 @@ def start_generation():
     url = "http://"+ip_address['Summarizer']+":5000"
     summarized_data = requests.post(url, json = data)
     return jsonify({"data":summarized_data.text,"topic" : class_type.text,"analytics" : analytics_count})
+
+@app.route('/analytics',methods = ['GET'])
+@cross_origin(supports_credentials=True)
+def get_analytics():
+    return {"analytics" : analytics_count}
 
 
 
