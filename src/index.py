@@ -26,7 +26,7 @@ analytics_count = [0,0,0,0,0,0,0,0,0,0,0]
 def start_generation():
     ip_address = json.load(open('utils/utils.json'))
     text = request.get_json()
-    new_text = text['input']
+    new_text = text['input'].lower()
     topics = text['topics']
     url = "http://"+ip_address['Classifier']+":5000"
     data = {"input": new_text,
